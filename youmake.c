@@ -27,7 +27,7 @@ int main(void)
     printf("%d\n", *pointer); // imprime o ponteiro base
     *pointer *= 2; //multiplica por dois o valor do apontado
     printf("%d\n", *(pointer + 3)); // soma 3 ao conteudo sem alterar o valor (so imprime pointer +3)
-    
+    //estudar ponteiros na segunda
     for (int j = 0; j < x; j++)
     {
         printf("%d", ptrx[j]);
