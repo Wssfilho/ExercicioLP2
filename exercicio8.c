@@ -24,7 +24,7 @@ int main()
         scanf("%d", &vetor[i]);
         media += vetor[i];
     }
-
+    
     media /= n;
     maior = menor = &vetor[0];
 
