@@ -15,7 +15,7 @@ int main(void)
         scanf("%d", &ptrx[i]);
     }
     pointer = ptrx; // poiter aponta para a base do vetor
-    a = *(pointer + 2); //anda o numero de casa
+    a = *(pointer + 2); //anda o numero de casa,não altera o valor
     printf("[%d]\n\n", *pointer);
     b = (*pointer + 3); //altera o valor do apontado somando 3;
     printf("%d\n", a);
@@ -26,6 +26,7 @@ int main(void)
     pointer -= 2;             // retorna o ponteiro pra base;
     printf("%d\n", *pointer); // imprime o ponteiro base
     *pointer *= 2; //multiplica por dois o valor do apontado
+    printf("%d\n", *pointer);
     printf("%d\n", *(pointer + 3)); // soma 3 ao conteudo sem alterar o valor (so imprime pointer +3)
     //estudar ponteiros na segunda
     for (int j = 0; j < x; j++)
