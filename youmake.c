@@ -5,6 +5,7 @@ int main(void)
 {
     int x = 4, *ptrx, *pointer, a, b;
     ptrx = (int *) malloc(x * sizeof(int));
+//ptrn =(float **) malloc (n * sizeof(float**);
     if (ptrx == NULL)
     {
         printf("memoria nao alocada");
