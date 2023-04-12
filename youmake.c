@@ -15,6 +15,8 @@ int main(void)
         printf("insira os valores do vetor");
         scanf("%d", &ptrx[i]);
     }
+    //quando nos digitamos no visual studio fica um efeito muito lindo
+    
     pointer = ptrx; // poiter aponta para a base do vetor
     a = *(pointer + 2); //anda o numero de casa,não altera o valor
     printf("[%d]\n\n", *pointer);
