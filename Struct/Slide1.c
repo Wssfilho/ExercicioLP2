@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct carro
 {
@@ -7,7 +8,6 @@ typedef struct carro
     float tempo;
     struct carro *proximo;
 } Tcarro;
-
 int main()
 {
     Tcarro *raiz = NULL, *ultimo;
