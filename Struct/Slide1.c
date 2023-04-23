@@ -14,7 +14,7 @@ int main()
     char nome[10];
 
     printf("Entrada de Dados\n");
-    printf("Digite o nome da equipe (0 para finalizar):");
+    printf("Digite o nome da equipe (0 para finalizar): ");
     gets(nome);
 
     while (nome[0] != '0')
