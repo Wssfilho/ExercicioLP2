@@ -33,5 +33,4 @@ int main(void)
     printf("Seu telefone e: %d\n", aluno1.telefone);
     printf("Seu sexo e: %s\n", aluno1.sexo);
     printf("Seu email e: %s\n", aluno1.email);
-
 }
