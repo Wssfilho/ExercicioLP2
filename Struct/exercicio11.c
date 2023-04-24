@@ -19,6 +19,10 @@ int main()
     scanf("%d", &seq.n);
 
     seq.val = (int *)malloc(seq.n * sizeof(int));
+    if(seq.val == NULL){
+        printf("NAO FOI ALOCAD0");
+        exit(-1);
+    }
 
     printf("Digite os valores da sequência: ");
     for (i = 0; i < seq.n; i++)
