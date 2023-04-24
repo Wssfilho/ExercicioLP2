@@ -19,7 +19,8 @@ int main()
     scanf("%d", &seq.n);
 
     seq.val = (int *)malloc(seq.n * sizeof(int));
-    if(seq.val == NULL){
+    if (seq.val == NULL)
+    {
         printf("NAO FOI ALOCAD0");
         exit(-1);
     }
