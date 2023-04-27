@@ -23,7 +23,7 @@ int main()
     while (nome[0] != '0')
     {
         if (raiz == NULL)
-        {
+        { //entra aqui so uma vez
             raiz = malloc(sizeof(Titem));
             ultimo = raiz;
         }
@@ -34,6 +34,7 @@ int main()
         }
         if (ultimo == NULL)
         {
+            //entra aqui so no final
             printf("Erro: Memoria insuficiente.\n");
             return -1;
         }
