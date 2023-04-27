@@ -16,7 +16,7 @@ int main()
     int i, soma = 0;
 
     printf("Digite a quantidade de elementos da sequência: ");
-    scanf("%d", &seq.n);
+    scanf("%d", &seq.n); //nos colocamos o elemento dentro da struct pois strcut é uma sequencia
 
     seq.val = (int *)malloc(seq.n * sizeof(int));
     if (seq.val == NULL)

@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct item
+typedef struct item //é para chamar dentro da struct
 {
     char nome[255];
     char telefone[13];
     struct item *ptr;
-} Titem;
+} Titem; //nome da struct
 
 int main()
 {
@@ -18,6 +18,7 @@ int main()
     printf("Digite o nome (0 para finalizar): ");
     fgets(nome, 255, stdin);
     nome[strcspn(nome, "\n")] = 0; //porque estou usando fgets
+    fflush(stdin);
 
     while (nome[0] != '0')
     {
