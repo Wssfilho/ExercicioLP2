@@ -28,7 +28,7 @@ int main(void)
     for (int i = 0; i < num_filhos; i++)
     {
 
-        printf("Insira o nome do filho: ");
+        printf("Insira o nome do filho %i: ", i + 1);
         gets(filhos[i].nome);
         Pessoa *pai;
         pai = malloc(sizeof(Pessoa));
@@ -55,12 +55,12 @@ int main(void)
     {
         printf("\t\t\t-------Filho:%s -------\n", filhos[i].nome);
         printf("\t\t\tMae: %s -------- Pai: %s\n", filhos[i].mae->nome, filhos[i].pai->nome);
+        printf("\n");
     }
     for (int i = 0; i < num_filhos; i++)
     {
         free(filhos[i].mae);
         free(filhos[i].pai);
-        
     }
     free(filhos);
     return 0;
