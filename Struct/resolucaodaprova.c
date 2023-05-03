@@ -23,7 +23,8 @@ int main(void)
     int numCliente, i;
     printf("INSIRA O NUMERO DE CLIENTES: \n");
     scanf("%d", &numCliente);
-    Tclientes clientes[numCliente]; // o for pecorre isso;
+    Tclientes *clientes; // o for pecorre isso;
+    clientes = (Tclientes*) malloc (numCliente * sizeof(Tclientes)); //alocacao dinamica
     Tdata dataProcessamento;
     int maior = 0, menores = 0;
 
@@ -71,5 +72,6 @@ int main(void)
             printf("%s %d", clientes[i].nome, clientes[i].telefone);
         }
     }
+    free(clientes);
     return 0;
 }
