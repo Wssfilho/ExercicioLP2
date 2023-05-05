@@ -44,18 +44,17 @@ int main(void)
     int menor = 0;
     for (int i = 0; i < num; i++)
     {
-        if (turma[i].data.nota1 > turma[i -  1].data.nota1 && turma[i].data.nota2 > turma[i - 1].data.nota2 && turma[i].data.nota3 > turma[i - 1].data.nota3)
+        if (turma[i].data.nota1 > turma[i - 1].data.nota1 && turma[i].data.nota2 > turma[i - 1].data.nota2 && turma[i].data.nota3 > turma[i - 1].data.nota3)
         {
-            
-            maior = i;
 
+            maior = i;
         }
         else
         {
             menor = i;
         }
     }
-    //system("clear || cls");
+    // system("clear || cls");
     printf("O aluno com nota mais alta nas prova: %s\n", turma[maior].nome);
     printf("o aluno com nota menor: %s\n", turma[menor].nome);
     printf("A media da turma foi: %.2f\n", media);
