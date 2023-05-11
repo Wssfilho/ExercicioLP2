@@ -4,6 +4,7 @@
 float **aloca_matriz(const int, const int);
 void prn_oper(float **, float **, float **, const int, const int, const char);
 void liberar_matriz(float **, const int);
+
 int main(void)
 {
     float **A, **B, **som, **sub;
