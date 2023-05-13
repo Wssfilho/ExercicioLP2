@@ -17,7 +17,7 @@ int main(void)
 char *binario(int num) // recebe um inteiro
 {
     char binario[100];
-    int i = 0;      // declara as variaveis
+    int i = 0;      // enquanto i nao acabar
     while (num > 0) // enquanto o numeoro for maior que zero ele roda o laco
     {
         binario[i] = (num % 2) + '0';
