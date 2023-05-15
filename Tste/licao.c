@@ -4,7 +4,7 @@
 int main(void)
 {
     float **A, **B, **som, **sub;
-    int i, j, l, c, z;
+    int i, j, l, c;
     // leitura do numero de linhas e colunas
     printf("Digite o numero de linhas da matriz: ");
     scanf("%d", &l);

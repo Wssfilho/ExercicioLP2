@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdlib.h>
+#include "Alocar.h"
 float **alocarr(const int llinha, const int ccoluna)
 {
     float **m;
