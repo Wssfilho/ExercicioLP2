@@ -1,15 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 float **alocar(const int, const int);
 void comparar(float **, float **, float **, const int, const int, const char);
 void liberar(float **, const int);
-
 int main(void)
 {
     float **A, **B, **som, **sub;
     int i, j, l, c;
-
     // leitura do numero de linhas e colunas
     printf("Digite o numero de linhas da matriz: ");
     scanf("%d", &l);
