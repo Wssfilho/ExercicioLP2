@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 int eh_primo(int n)
 {
     if (n <= 1)
@@ -12,7 +12,7 @@ int eh_primo(int n)
     return 1;
 }
 
-int main()
+int main(void)
 {
     int n;
     printf("Insira o tamanho da impressao: ");
