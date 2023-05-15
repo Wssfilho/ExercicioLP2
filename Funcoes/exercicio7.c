@@ -13,7 +13,7 @@ int perfeito(int num)
     return soma == num;
 }
 
-int main(main)
+int main(void)
 {
     printf("Números perfeitos entre 1 e 100:\n");
     for (int i = 1; i <= 100; i++)
