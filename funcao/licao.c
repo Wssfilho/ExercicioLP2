@@ -1,30 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-float **aloca_matriz(const int, const int);
-void prn_oper(float **, float **, float **, const int, const int, const char);
-void liberar_matriz(float **, const int);
+float **alocar(const int, const int);
+void comparar(float **, float **, float **, const int, const int, const char);
+void liberar(float **, const int);
 
 int main(void)
 {
     float **A, **B, **som, **sub;
-    int i, j, m, n;
+    int i, j, l, c;
 
     // leitura do numero de linhas e colunas
     printf("Digite o numero de linhas da matriz: ");
-    scanf("%d", &m);
+    scanf("%d", &l);
     printf("Digite o numero de colunas da matriz: ");
-    scanf("%d", &n);
+    scanf("%d", &c);
 
     // alocacao dinamica de matrizes;
-    A = aloca_matriz(m, n);
-    B = aloca_matriz(m, n);
-    som = aloca_matriz(m, n);
-    sub = aloca_matriz(m, n);
+    A = alocar(l, c);
+    B = alocar(l, c);
+    som = alocar(l, c);
+    sub = alocar(l, c);
 
-    for (i = 0; i < m; i++)
+    for (i = 0; i < l; i++)
     {
-        for (j = 0; j < n; j++)
+        for (j = 0; j < c; j++)
         {
             printf("Digite o elemento [%d][%d] de A: ", i + 1, j + 1);
             scanf("%f", &A[i][j]);
@@ -36,31 +36,31 @@ int main(void)
     }
     // resultados
     printf("\nSOMA\n");
-    prn_oper(A, B, som, m, n, '+');
+    comparar(A, B, som, l, c, '+');
     printf("\nSubtracao\n");
-    prn_oper(A, B, som, m, n, '-');
+    comparar(A, B, som, l, c, '-');
     // limpando memoria
-    liberar_matriz(A, m);
-    liberar_matriz(B, m);
-    liberar_matriz(som, m);
-    liberar_matriz(sub, m);
+    liberar(A, l);
+    liberar(B, l);
+    liberar(som, l);
+    liberar(sub, l);
 
     return 0;
 }
-float **aloca_matriz(const int l, const int c)
+float **alocar(const int llinha, const int ccoluna)
 {
     float **m;
     int i;
 
-    m = (float **)malloc(l * sizeof(float *));
+    m = (float **)malloc(llinha * sizeof(float *));
     if (m == NULL)
     {
         printf("ERRO, estouro de memoria");
         exit(-1);
     }
-    for (i = 0; i < l; i++)
+    for (i = 0; i < llinha; i++)
     {
-        m[i] = (float *)malloc(c * sizeof(float));
+        m[i] = (float *)malloc(ccoluna * sizeof(float));
         if (m[i] == NULL)
         {
             printf("Error, estouro de momoria!\n");
@@ -69,15 +69,14 @@ float **aloca_matriz(const int l, const int c)
     }
     return m;
 }
-void liberar_matriz(float **m, const int l)
+void liberar(float **m, const int l)
 {
     int i;
     for (i = 0; i < l; i++)
         free(m[i]);
     free(m);
 }
-void prn_oper(float **m1, float **m2, float **m3,
-              const int l, const int c, const char oper)
+void comparar(float **m1, float **m2, float **m3, const int l, const int c, const char oper)
 {
     int i, j;
 

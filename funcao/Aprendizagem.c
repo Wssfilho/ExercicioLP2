@@ -1,18 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void multiplicacao(int *, const int);
-
+int *aloc_vet(const int); //funcao para alocar um vetor
+void libera_vet(const int *v)
+{
+    free(v);
+}
 int main(void)
 {
-    int num, n;
-    printf("Insira o numero que deseja multiplicar e o numero de multiplicacoes: ");
-    scanf("%d %d", &num, &n);
-    multiplicacao(&num, n);
-    printf("A multiplicacao e: %d", num);
+    int *v, n;
+    printf("Insira o tamanho do vetor: ");
+    scanf("%d", &n);
+    v = aloc_vet(n);
+    libera_vet(v);
     return 0;
 }
-void multiplicacao(int *x, int n)
+int *aloc_vet(const int n)
 {
-    *x = n * *x;
+    int *v;
+    v = (int *)malloc(n * sizeof(int));
+    if (v == NULL)
+    {
+        printf("Erro, estouro");
+        exit(-1);
+    }
+    return v;
 }
