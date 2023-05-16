@@ -8,7 +8,66 @@ typedef struct
     int idade;
     int matricula;
 } Taluno;
+//funcoes utilizadas
+void numeroaluno(int *n);
+void opcoes(void);
+Taluno *alocar(const int n);
+void preencher(Taluno *alunos, const int n);
+void mostrar(Taluno *alunos, const int n);
+void preencher(Taluno *alunos, const int n);
+int main(void)
+{
+    int opcao = 0;
+    int n;
+    Taluno *alunos;
+    numeroaluno(&n);
+    // Pede ao usuário o número de alunos
+    alunos = alocar(n);
+    system("clear || cls");
+    do
+    {
+        opcoes();
+        scanf("%d", &opcao);
+        switch (opcao)
+        {
+        case 1:
+            // Preenche os dados dos alunos
+            preencher(alunos, n);
+            break;
+        case 2:
+            // Mostra os dados dos alunos
+            mostrar(alunos, n);
+            break;
+        case 3:
+            // mostar o aluno mais novo
+            comp(alunos, n);
+            break;
+        }
 
+    } while (opcao);
+    // Libera a memória alocada
+    free(alunos);
+
+    return 0;
+}
+
+//
+
+void numeroaluno(int *n)
+{
+    opcoes();
+    printf("Digite o número de alunos: ");
+    scanf("%d", n);
+}
+// funcao menu
+void opcoes(void)
+{
+    printf("------ ESCOLHA UMA DAS OPCOES------\n\n");
+    printf("0. *Sair do sistema* \n");
+    printf("1. Inserir aluno: \n");
+    printf("2. Mostrar aluno: \n");
+    printf("3. Comparar alunos e imprimir o mais novo: \n");
+}
 // Função para alocar dinamicamente um array de Taluno de tamanho n
 Taluno *alocar(const int n)
 {
@@ -20,12 +79,12 @@ Taluno *alocar(const int n)
     }
     return alunos;
 }
-
 // Função para preencher os dados dos alunos
 void preencher(Taluno *alunos, const int n)
 {
     for (int i = 0; i < n; i++)
     {
+        fflush(stdin);
         printf("Digite o nome do aluno %d: ", i + 1);
         scanf("%[^\n]s%*c", alunos[i].nome);
         printf("Digite a idade do aluno %d: ", i + 1);
@@ -34,7 +93,6 @@ void preencher(Taluno *alunos, const int n)
         scanf("%d", &alunos[i].matricula);
     }
 }
-
 // Função para mostrar os dados dos alunos
 void mostrar(Taluno *alunos, const int n)
 {
@@ -57,27 +115,4 @@ void comp(Taluno *alunos, const int n)
         }
     }
     printf("O aluno mais novo e: %s", alunos[aluno_novo].nome);
-}
-
-int main()
-{
-    int n;
-    // Pede ao usuário o número de alunos
-    printf("Digite o número de alunos: ");
-    scanf("%d", &n);
-
-    // Aloca dinamicamente o array de alunos
-    Taluno *alunos;
-    alunos = alocar(n);
-
-    // Preenche os dados dos alunos
-    preencher(alunos, n);
-    // Mostra os dados dos alunos
-    mostrar(alunos, n);
-    //mostar o aluno mais novo
-    comp(alunos, n);
-    // Libera a memória alocada
-    free(alunos);
-
-    return 0;
 }
