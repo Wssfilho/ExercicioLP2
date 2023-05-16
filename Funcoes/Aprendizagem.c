@@ -12,9 +12,9 @@ typedef struct
 void numeroaluno(int *n);
 void opcoes(void);
 Taluno *alocar(const int n);
-void preencher(Taluno *alunos, const int n);
 void mostrar(Taluno *alunos, const int n);
 void preencher(Taluno *alunos, const int n);
+void comp(Taluno *alunos, const int n);
 int main(void)
 {
     int opcao = 0;
