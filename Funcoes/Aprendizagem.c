@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 // Define a estrutura Taluno com os membros nome, idade e matricula
 typedef struct
 {
