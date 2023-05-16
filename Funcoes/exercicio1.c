@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *binario(int); // declara uma funcao do tipo char que retorna um ponteiro
-
+char *binario(const int); // declara uma funcao do tipo char que retorna um ponteiro
 int main(void)
 {
     int ent;
