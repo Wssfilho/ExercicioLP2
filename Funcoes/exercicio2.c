@@ -1,19 +1,26 @@
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
 
-int inverter_numero(int num)
+int BinarioToDecimal(char *binario)
 {
-    int inverso = 0;
-    while (num > 0)
+    int decimal = 0;
+    int tamanho = strlen(binario);
+    for (int i = 0; i < tamanho; i++)
     {
-        inverso = inverso * 10 + num % 10;
-        num /= 10;
+        if (binario[tamanho - i - 1] == '1')
+        {
+            decimal += pow(2, i);
+        }
     }
-    return inverso;
+    return decimal;
 }
 
-int main(void)
+int main()
 {
-    int num = 1975;
-    printf("%d\n", inverter_numero(num));
+    char binario[50];
+    printf("Insira os numeros em decimal: ");
+    scanf("%[^\n]s%*c", binario);
+    printf("%d\n", BinarioToDecimal(binario));
     return 0;
 }
