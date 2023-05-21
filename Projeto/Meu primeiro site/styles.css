@@ -4,6 +4,11 @@
     padding-bottom: 21%;
     display: inline-block;
 }
+.infos{
+    display: flex;
+    margin-left: 20px;
+    margin-top: 20px;
+}	
 .titulo{
     color: black;
     font-size: 30px;
