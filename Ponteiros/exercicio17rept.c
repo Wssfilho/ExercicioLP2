@@ -1,17 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+int *alocarvetor(const int n)
+{
+    int *v;
+    v = (int *)malloc(n * sizeof(int));
+    if(v == NULL){
+        printf("A memoria nao foi alocada");
+    }
+    return v;
+}
 int main(void)
 {
     int n, i, j;
     printf("Digite o tamanho do vetor: ");
     scanf("%d", &n);
-    int *vetor = (int *) malloc(n * sizeof(int));
+    int *vetor; 
+    vetor = alocarvetor(n);
+
     printf("Digite os elementos do vetor: ");
-    if(vetor == NULL){
-        printf("MEMORIA NAO ALOCADA");
-        exit(-1);
-    }
 
     for (i = 0; i < n; i++)
     {
@@ -35,6 +41,8 @@ int main(void)
         {
             printf("%d se repete %d vezes\n", vetor[i], cont);
         }
+        else
+            printf("Nao se repete");
     }
 
     free(vetor);

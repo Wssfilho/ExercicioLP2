@@ -1,20 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-int main()
+float **alocacao(const int n)
 {
-    int n, i, j;
-    printf("Insira a dimensão da matriz quadrada: Linha = Coluna:  ");
-    scanf("%d", &n); // pede o tamanho da matriz sendo ela quadrada, como é quadrada, usei a mesma variavel para a coluna e linha
-
-    float **matriz;
-    matriz = (float **)malloc(n * sizeof(float *)); // alocacao dinamica para matriz
+    float **matriz = (float **)malloc(n * sizeof(float *)); // alocacao dinamica para matriz
     if (matriz == NULL)
     {
         printf("MEMORIA NAO ALOCADA"); // verifica a alocacao
         exit(-1);
     }
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         matriz[i] = malloc(n * sizeof(float)); // faz alocacao das colunas da matriz
         if (matriz[i] == NULL)
@@ -23,17 +17,25 @@ int main()
             exit(-1);
         }
     }
-
-    printf("Insira os elementos da matriz:\n");
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (j = 0; j < n; j++)
+        for (int j = 0; j < n; j++)
         {
             printf("DIGITE O ELEMENTO [%d][%d]", i + 1, j + 1);
             scanf("%f", &matriz[i][j]); // preencher os elemetos
         }
     }
 
+    return matriz;
+}
+int main(void)
+{
+    int n, i, j;
+    printf("Insira a dimensão da matriz quadrada: Linha = Coluna:  ");
+    scanf("%d", &n); // pede o tamanho da matriz sendo ela quadrada, como é quadrada, usei a mesma variavel para a coluna e linha
+
+    float **matriz;
+    matriz = alocacao(n);
     float maior1 = matriz[0][0];
     float maior2 = matriz[0][0];
     int negativos = 0; // declaracao de variaveis
