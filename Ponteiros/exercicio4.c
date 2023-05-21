@@ -3,26 +3,43 @@
 
 int main()
 {
-    char key, choice;
-    int num, count;
-    long int date;
-    float yield;
-    double price;
+    int n, i, x;
+    float *prova1, *prova2;
+    printf("insira o numero de alunos");
+    scanf("%d", &n); // recebe o numero de alunos
+    prova1 = (float *)malloc(n * (sizeof(float)));
+    prova2 = (float *)malloc(n * sizeof(float)); // alocacao dinamica para os vetores
+    if (prova1 == NULL || prova2 == NULL)
+    {
+        printf("MEMORIA NAO ALOCADA"); // teste se a alocacao foi bem sucedida
+        exit(-1);
+    }
 
-    //a)
-    printf("Endereço de key: %p\n", &key);
-    printf("Endereço de choice: %p\n", &choice);
-    printf("Endereço de num: %p\n", &num);
-    printf("Endereço de count: %p\n", &count);
-    printf("Endereço de date: %p\n", &date);
-    printf("Endereço de yield: %p\n", &yield);
-    printf("Endereço de price: %p\n", &price);
-    //b) 
-    //c
-    printf("\nTamanho de char: %d bytes\n", sizeof(char));
-    printf("Tamanho de int: %d bytes\n", sizeof(int));
-    printf("Tamanho de long int: %li bytes\n", sizeof(long int));
-    printf("Tamanho de float: %f bytes\n", sizeof(float));
-    printf("Tamanho de double: %lf bytes\n", sizeof(double));
+    float media1 = 0, media2 = 0, mediaaluno;
 
+    for (i = 0; i < n; i++)
+    {
+        printf("Insira a nota do aluno %d na prova 1: ", i + 1);
+        scanf("%f", &prova1[i]); // Recebe a nota
+        media1 += prova1[i];     // soma a nota à media
+
+        printf("Insira a nota do aluno %d na prova 2: ", i + 1);
+        scanf("%f", &prova2[i]);
+        media2 += prova2[i];
+    }
+
+    media1 /= n;
+    media2 /= n; // para saber a media da turma em cada prova
+
+    for (x = 0; x < n; x++)
+    {
+        mediaaluno = (prova1[x] + prova2[x]) / 2;                                                                         // saber a media do aluno nas duas provas
+        printf("Aluno %d: Media = %.2f, Situacao = %s\n", x + 1, mediaaluno, mediaaluno >= 7 ? "Aprovado" : "Reprovado"); // saber se foi aprovado ou nao!
+    }
+    printf("Media da turma na prova 1: %.2f\n", media1);
+    printf("Media da turma na prova 2: %.2f\n", media2);
+
+    free(prova1);
+    free(prova2); // limpeza de memoria
+    return 0;
 }
