@@ -15,7 +15,7 @@ int eh_primo(int n)
 int main(void)
 {
     int n;
-    printf("Insira o tamanho da impressao: ");
+    printf("Insira o tamanho da impressao de numeros primos: ");
     scanf("%d", &n);
     for (int i = 1; i <= n; i++)
     {
