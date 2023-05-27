@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <conio.h>
-#include <ctype.h>
 #define N 100
 
-void inicio();
-void inserir();
-void listar();
-void remover();
+void inicio(void);
+void inserir(void);
+void listar(void);
+void remover(void);
 typedef struct gastos
 {
     int mes;
@@ -47,7 +45,7 @@ int main(void)
     } while (opcao != 0);
     return 0;
 }
-void inicio()
+void inicio(void)
 {
     printf("ESOCOLHA UMA DAS SEGUINTES OPCOES\n");
     printf("0. Sair\n");
@@ -55,7 +53,7 @@ void inicio()
     printf("2. Pesquisar\n");
     printf("3. Remover\n");
 }
-void inserir()
+void inserir(void)
 {
     FILE *arquivo;
     Tgastos ctt;
@@ -83,7 +81,7 @@ void inserir()
         fclose(arquivo);
     }
 }
-void listar()
+void listar(void)
 {
     system("clear || cls");
     FILE *arquivo;
@@ -103,12 +101,11 @@ void listar()
             printf("Tipo de conta: %s\n", ctt.tipodeConta);
         }
         printf("FIM DA LISTA, PRECIONE ENTER PARA RETORNAR AO MENU");
-        getch();
         system("clear || cls");
         fclose(arquivo);
     }
 }
-void remover()
+void remover(void)
 {
     system("clear || cls");
     FILE *arquivo;
@@ -132,7 +129,7 @@ void remover()
         fflush(stdin);
         scanf("%d", &mes);
         fflush(stdin);
-        gets(nome);
+       scanf("%[^\n]s%*c", nome);
 
         while (fread(&ctt, sizeof(Tgastos), 1, arquivo))
         {
