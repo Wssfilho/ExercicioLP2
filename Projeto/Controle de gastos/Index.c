@@ -1,175 +1,93 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #define N 100
-
-void inicio(void);
-void inserir(void);
-void listar(void);
-void remover(void);
-typedef struct gastos
+typedef struct
 {
+    int dia;
     int mes;
-    char tipodeConta[N];
+    int ano;
 
-} Tgastos;
+} Tdata;
+typedef struct
+{
+    char nome[N];
+    Tdata datnasc;
 
+} Tpessoa;
+void cabecalho(void);
+void lerpessoa(const int n, Tpessoa *);
+void mostrarpessoa(const int n, const Tpessoa *);
+Tpessoa *alocacao(const int n);
 int main(void)
 {
+    Tpessoa *dados;
     int opcao;
     do
     {
-        inicio();
+        cabecalho();
+        int n;
         scanf("%d", &opcao);
-
         switch (opcao)
         {
-        case 0:
-            system("clear || cls");
-            printf("OBRIGADO POR ULTILIZAR\n");
-            printf("VOLTE SEMPRE\n");
-            break;
         case 1:
-            inserir();
+            printf("insira a quantidade de Alunos: ");
+            scanf("%d", &n);
+            dados = alocacao(n);
+            lerpessoa(n, dados);
+            printf("Deseja voltar ao menu? sim 1, nao 0 ");
+            scanf("%d", &opcao);
             break;
         case 2:
-            listar();
-            break;
-        case 3:
-            remover();
+            mostrarpessoa(n, dados);
             break;
         default:
-            printf("ESCOLHA APNEAS AS OPCEOS LISTADAS :) ");
+            system("clear || cls");
             break;
         }
+
     } while (opcao != 0);
+    free(dados);
     return 0;
 }
-void inicio(void)
+void cabecalho(void)
 {
-    printf("ESOCOLHA UMA DAS SEGUINTES OPCOES\n");
-    printf("0. Sair\n");
-    printf("1. Inserir\n");
-    printf("2. Pesquisar\n");
-    printf("3. Remover\n");
+    printf("---- BEM VINDO AO SYSTEMA ----");
+    printf("\nEscolha uma das opcoes: \n");
+    printf("0. Sair");
+    printf("\n");
+    printf("1. Inserir");
+    printf("\n");
+    printf("2. Mostrar");
 }
-void inserir(void)
+Tpessoa *alocacao(const int n)
 {
-    FILE *arquivo;
-    Tgastos ctt;
-    arquivo = fopen("gastos.txt", "ab");
-    if (arquivo == NULL)
+    Tpessoa *dados;
+    dados = (Tpessoa *)malloc(n * sizeof(Tpessoa));
+    if (dados == NULL)
     {
-        printf("ARQUIVO NAO ABERTO :(");
+        printf("Memoria nao alocadas");
         exit(-1);
     }
-    else
+    return dados;
+}
+void lerpessoa(const int n, Tpessoa *vetor)
+{
+    for (int i = 0; i < n; i++)
     {
-        do
-        {
-            printf("Digite o mes de forma numerica: ");
-            scanf("%d", &ctt.mes);
-            fflush(stdin);
-
-            printf("Digite o tipo da conta: ");
-            scanf("%s", ctt.tipodeConta);
-
-            fwrite(&ctt, sizeof(Tgastos), 1, arquivo);
-
-            printf("Deseja inserir mais alguma conta (s/n): ");
-        } while (getche() == 's' || getche() == 'S');
-        fclose(arquivo);
+        printf("Insira o nome do aluno %d: ", i + 1);
+        scanf("%*c");
+        scanf("%[^\n]s%*c", vetor[i].nome);
+        printf("Insira a data de nascimento dd/mm/aa (sem pontos e caracteres): ");
+        scanf("%d %d %d", &vetor[i].datnasc.dia, &vetor[i].datnasc.mes, &vetor[i].datnasc.ano);
     }
 }
-void listar(void)
+void mostrarpessoa(const int n, const Tpessoa *vetor)
 {
     system("clear || cls");
-    FILE *arquivo;
-    Tgastos ctt;
-
-    arquivo = fopen("gastos.txt", "rb");
-    if (arquivo == NULL)
+    for (int i = 0; i < n; i++)
     {
-        printf("O ARQUIVO NAO FOI ABERTO :(");
-        exit(-1);
-    }
-    else
-    {
-        while (fread(&ctt, sizeof(Tgastos), 1, arquivo))
-        {
-            printf("Mes: %d\n", ctt.mes);
-            printf("Tipo de conta: %s\n", ctt.tipodeConta);
-        }
-        printf("FIM DA LISTA, PRECIONE ENTER PARA RETORNAR AO MENU");
-        system("clear || cls");
-        fclose(arquivo);
-    }
-}
-void remover(void)
-{
-    system("clear || cls");
-    FILE *arquivo;
-    FILE *temp;
-    Tgastos ctt;
-    char nome[N];
-    int mes;
-    int achou = 0;
-    int tanto = ' ';
-    char tanto2[N];
-    arquivo = fopen("gastos.txt", "rb");
-    temp = fopen("temp.txt", "wb");
-    if (arquivo == NULL)
-    {
-        printf("ARQUIVO NAO ABERTO!\n");
-        exit(-1);
-    }
-    else
-    {
-        printf("INSIRA O MES E O NOME DA CONTA QUE DESEJA REMOVER\n");
-        fflush(stdin);
-        scanf("%d", &mes);
-        fflush(stdin);
-       scanf("%[^\n]s%*c", nome);
-
-        while (fread(&ctt, sizeof(Tgastos), 1, arquivo))
-        {
-            if (strcmp(nome, ctt.tipodeConta) == 0 && mes == ctt.mes)
-            {
-                achou = 1;
-                printf("Mes: %d", ctt.mes);
-                printf("Tipo de conta: %s", ctt.tipodeConta);
-                printf("Deseja remover esse cadstro(S/N)?\n");
-                strcpy(ctt.tipodeConta, tanto2);
-                ctt.mes = tanto;
-                if (getche() == 's')
-                {
-                    achou = 2;
-                }
-                else
-                {
-                    fwrite(&ctt, sizeof(Tgastos), 1, temp);
-                }
-            }
-            else
-            {
-                fwrite(&ctt, sizeof(Tgastos), 1, temp);
-            }
-        }
-        if (achou == 0)
-        {
-            printf("Nao foi encontrado nenhum contato com esse nome!\n");
-        }
-        else if (achou == 1)
-        {
-            printf("Nao foi encontrado nenhum contato com esse nome!\n");
-        }
-        else
-        {
-            printf("cadastro removido com sucesso!\n");
-        }
-        fclose(arquivo);
-        fclose(temp);
-        remove("gastos.txt");
-        rename("temp.txt", "gastos.txt");
+        printf("\n--Dados do Aluno--\n");
+        printf("Nome: %s\n", vetor[i].nome);
+        printf("Data de nascimento: %d/%d/%d\n", vetor[i].datnasc.dia, vetor[i].datnasc.mes, vetor[i].datnasc.ano);
     }
 }
