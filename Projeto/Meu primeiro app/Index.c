@@ -17,7 +17,7 @@ typedef struct
 void cabecalho(void);
 void lerpessoa(const int n, Tpessoa *);
 void mostrarpessoa(const int n, const Tpessoa *);
-Void alocacao(const int n, Tpessoa *dado);
+void alocacao(const int n, Tpessoa *dado);
 int main(void)
 {
     Tpessoa *dados;
@@ -59,7 +59,7 @@ void cabecalho(void)
     printf("\n");
     printf("2. Mostrar");
 }
-Void alocacao(const int n, Tpessoa *dado)
+void alocacao(const int n, Tpessoa *dado)
 {
     dados = (Tpessoa *)malloc(n * sizeof(Tpessoa));
     if (dados == NULL)
