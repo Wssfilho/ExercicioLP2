@@ -17,7 +17,7 @@ typedef struct
 void cabecalho(void);
 void lerpessoa(const int n, Tpessoa *);
 void mostrarpessoa(const int n, const Tpessoa *);
-Tpessoa *alocacao(const int n);
+Void alocacao(const int n, Tpessoa *dado);
 int main(void)
 {
     Tpessoa *dados;
@@ -32,7 +32,7 @@ int main(void)
         case 1:
             printf("insira a quantidade de Alunos: ");
             scanf("%d", &n);
-            dados = alocacao(n);
+            alocacao(n, &dados);
             lerpessoa(n, dados);
             printf("Deseja voltar ao menu? sim 1, nao 0 ");
             scanf("%d", &opcao);
@@ -59,16 +59,14 @@ void cabecalho(void)
     printf("\n");
     printf("2. Mostrar");
 }
-Tpessoa *alocacao(const int n)
+Void alocacao(const int n, Tpessoa *dado)
 {
-    Tpessoa *dados;
     dados = (Tpessoa *)malloc(n * sizeof(Tpessoa));
     if (dados == NULL)
     {
         printf("Memoria nao alocadas");
         exit(-1);
     }
-    return dados;
 }
 void lerpessoa(const int n, Tpessoa *vetor)
 {
