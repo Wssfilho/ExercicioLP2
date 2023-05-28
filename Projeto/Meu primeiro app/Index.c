@@ -61,7 +61,7 @@ void cabecalho(void)
 }
 void alocacao(const int n, Tpessoa *dado)
 {
-    dados = (Tpessoa *)malloc(n * sizeof(Tpessoa));
+    dado = (Tpessoa *)malloc(n * sizeof(Tpessoa));
     if (dados == NULL)
     {
         printf("Memoria nao alocadas");
