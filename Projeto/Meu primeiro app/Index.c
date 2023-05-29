@@ -17,7 +17,7 @@
  void cabecalho(void); 
  void lerpessoa(const int n, Tpessoa *); 
  void mostrarpessoa(const int n, const Tpessoa *); 
- Tpessoa *alocacao(const int n); 
+ void alocacao(const int n, Tpessoa *dados); 
  int main(void) 
  { 
      Tpessoa *dados; 
@@ -32,7 +32,7 @@
          case 1: 
              printf("insira a quantidade de Alunos: "); 
              scanf("%d", &n); 
-             dados = alocacao(n);
+             dados = alocacao(n, &dados);
              lerpessoa(n, dados); 
              printf("Deseja voltar ao menu? sim 1, nao 0 "); 
              scanf("%d", &opcao); 
@@ -59,15 +59,14 @@
      printf("\n"); 
      printf("2. Mostrar"); 
  } 
- Tpessoa *alocacao(const int n) 
+ void alocacao(const int n, Tpessoa *dado) 
 { 
-    Tpessoa *dado = (Tpessoa *)malloc(n * sizeof(Tpessoa)); 
+    dado = (Tpessoa *)malloc(n * sizeof(Tpessoa)); 
     if (dado == NULL) 
     { 
         printf("Memoria nao alocadas"); 
         exit(-1); 
     } 
-    return dado;
 }
  void lerpessoa(const int n, Tpessoa *vetor) 
  { 
