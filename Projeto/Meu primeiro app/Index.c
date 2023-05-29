@@ -21,6 +21,7 @@ void mostrarpessoa(const int n, const Tpessoa *);
 Tpessoa *alocacao(const int n);
 void mostraraniversario(Tpessoa estrutura[], const int n);
 void error(int *opacao);
+//void returno(int *opcao);
 int main(void)
 {
     Tpessoa *dados; // estrutura alocada dinamicamente.
@@ -28,10 +29,10 @@ int main(void)
     do
     {
 
-        system("clear || cls");
         cabecalho();
         int n;
         scanf("%d", &opcao);
+        system("clear || cls");
         switch (opcao)
         {
         case 1:
