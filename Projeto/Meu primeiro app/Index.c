@@ -17,10 +17,10 @@
  void cabecalho(void); 
  void lerpessoa(const int n, Tpessoa *); 
  void mostrarpessoa(const int n, const Tpessoa *); 
- void alocacao(const int n, Tpessoa *dados); 
+ Tpessoa *alocacao(const int n); 
  int main(void) 
  { 
-     Tpessoa *dados; 
+     Tpessoa *dados; //estrutura alocada dinamicamente. 
      int opcao; 
      do 
      { 
@@ -32,7 +32,7 @@
          case 1: 
              printf("insira a quantidade de Alunos: "); 
              scanf("%d", &n); 
-             alocacao(n, &dados);
+             dados = alocacao(n);
              lerpessoa(n, dados); 
              printf("Deseja voltar ao menu? sim 1, nao 0 "); 
              scanf("%d", &opcao); 
@@ -59,14 +59,15 @@
      printf("\n"); 
      printf("2. Mostrar"); 
  } 
- void alocacao(const int n, Tpessoa *dado) 
+Tpessoa *alocacao(const int n) 
 { 
-    dado = (Tpessoa *)malloc(n * sizeof(Tpessoa)); 
+    Tpessoa *dado = (Tpessoa *)malloc(n * sizeof(Tpessoa)); 
     if (dado == NULL) 
     { 
         printf("Memoria nao alocadas"); 
         exit(-1); 
     } 
+    return dado;
 }
  void lerpessoa(const int n, Tpessoa *vetor) 
  { 
