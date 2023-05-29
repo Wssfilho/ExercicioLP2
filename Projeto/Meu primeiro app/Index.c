@@ -45,7 +45,7 @@ int main(void)
             }
             dados = alocacao(n);
             lerpessoa(n, dados);
-            system("clear || cls");
+            sleep(2);
             cont++;
             break;
         case 2:
