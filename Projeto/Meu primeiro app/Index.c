@@ -32,7 +32,7 @@
          case 1: 
              printf("insira a quantidade de Alunos: "); 
              scanf("%d", &n); 
-             dados = alocacao(n, &dados);
+             alocacao(n, &dados);
              lerpessoa(n, dados); 
              printf("Deseja voltar ao menu? sim 1, nao 0 "); 
              scanf("%d", &opcao); 
