@@ -20,7 +20,7 @@ int main(void)
     float base; // declaracao de variaveis
     int expoente;
     printf("Insira o numero (base) e posteriormente o numero (expoente) ");
-    scanf("%f %d", &base, &expoente);                                                        // coleta de dados
+    scanf("%f %d", &base, &expoente); // coleta de dados
     printf("%.1f elevado a %d eh igual a %.3f\n", base, expoente, potencia(base, expoente)); // chamada a funcao no printf
     return 0;
 }
