@@ -10,7 +10,7 @@ int main(void)
     if (a < 0 || b < 0)
         exit(-1);   //condicao se for menor que 0
     for (int i = 0; i < b; i++)
-        soma += a;
+        soma += a; //para avaliar a soma a*b
     printf("A avaliacao eh: %d", soma);
     return 0;
 }
