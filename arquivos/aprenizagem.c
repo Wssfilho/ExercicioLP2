@@ -12,18 +12,10 @@ typedef struct
     Tdatas data;
 
 } Tpessoa;
-Tpessoa alloc(Tpessoa *vector)
+void isect(Tpessoa *a)
 {
-    int n;
-    printf("Insira o tamanho da estrutura: ");
-    scanf("%d", &n);
-    printf("\n");
-    vector = (Tpessoa *)malloc(n * sizeof(Tpessoa));
-    if(vector == NULL)
-    {
-        printf("Vetor nao alocado: ");
-    }
-    return *vector;
+    printf("Insira o nome: ");
+    scanf("%[^\n]s%*c", &a->nome);
 }
 void header(void)
 {
@@ -52,7 +44,8 @@ int main(void)
         switch (opcao)
         {
         case 1:
-            alloc(&vector);
+            isect(&vector);
+            printf("%s", vector.nome);
             break;
         case 2:
             break;
