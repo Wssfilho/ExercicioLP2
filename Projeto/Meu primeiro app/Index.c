@@ -16,50 +16,38 @@ typedef struct
 
 } Tpessoa;
 void cabecalho(void);
-void lerpessoa(const int n, Tpessoa *);
-void mostrarpessoa(const int n, const Tpessoa *);
-Tpessoa *alocacao(const int n);
-void mostraraniversario(Tpessoa estrutura[], const int n);
+void mostrarpessoa(FILE *arq, Tpessoa *);
+Tpessoa *alocacao(void);
+void inserir(Tpessoa *a, FILE *arquivo);
+//void mostraraniversario(Tpessoa estrutura[], const int n);
 void error(int *opacao);
-//void returno(int *opcao);
+// void returno(int *opcao);
 int main(void)
 {
+    FILE *arquivo = fopen("arquivo.txt", "a+");
+    if (arquivo == NULL)
+        exit(-1);
     Tpessoa *dados; // estrutura alocada dinamicamente.
     int opcao, cont = 0;
     do
     {
-
         cabecalho();
-        int n;
         scanf("%d", &opcao);
         system("clear || cls");
         switch (opcao)
         {
         case 1:
             system("clear || cls");
-            printf("insira a quantidade de Alunos: ");
-            scanf("%d", &n);
-            if (n < 0)
-            {
-                error(&opcao);
-                break;
-            }
-            dados = alocacao(n);
-            lerpessoa(n, dados);
+            dados = alocacao();
+            inserir(dados, arquivo);
             sleep(2);
             cont++;
             break;
         case 2:
-            if (cont == 0)
-            {
-                error(&opcao);
-            }
-            else
-            {
-                mostrarpessoa(n, dados);
-            }
+                mostrarpessoa(arquivo, dados);
             break;
         case 3:
+        /*
             if (cont == 0)
             {
                 error(&opcao);
@@ -69,12 +57,14 @@ int main(void)
                 mostraraniversario(dados, n);
             }
             break;
+        */
         default:
             // printf("Entrou do defout");
             break;
         }
 
     } while (opcao > 0);
+    fclose(arquivo);
     free(dados);
     return 0;
 }
@@ -90,9 +80,9 @@ void cabecalho(void)
     printf("\n");
     printf("3. Procurar aniversariantes: ");
 }
-Tpessoa *alocacao(const int n)
+Tpessoa *alocacao(void)
 {
-    Tpessoa *dado = (Tpessoa *)malloc(n * sizeof(Tpessoa));
+    Tpessoa *dado = (Tpessoa *)malloc(sizeof(Tpessoa));
     if (dado == NULL)
     {
         printf("Memoria nao alocadas");
@@ -100,27 +90,24 @@ Tpessoa *alocacao(const int n)
     }
     return dado;
 }
-void lerpessoa(const int n, Tpessoa *vetor)
+void inserir(Tpessoa *a, FILE *arquivo)
 {
-    for (int i = 0; i < n; i++)
-    {
-        printf("Insira o nome do aluno %d: ", i + 1);
-        scanf("%*c");
-        scanf("%[^\n]s%*c", vetor[i].nome);
-        printf("Insira a data de nascimento dd/mm/aa (sem pontos e caracteres): ");
-        scanf("%d %d %d", &vetor[i].datnasc.dia, &vetor[i].datnasc.mes, &vetor[i].datnasc.ano);
+    printf("Digite o nome: ");
+    scanf("%s", a->nome);
+    printf("Digite a idade: ");
+    scanf("%d %d %d", &a->datnasc.dia, &a->datnasc.mes, &a->datnasc.ano);
+    fprintf(arquivo, "%s %d %d %d\n", a->nome, a->datnasc.dia, a->datnasc.mes, a->datnasc.ano);
+}
+void mostrarpessoa(FILE *arq, Tpessoa *vetor)
+{
+    rewind(arq);
+    printf("\n--Dados do Aluno--\n");
+    while(fscanf(arq, "%s %d %d %d\n", vetor->nome, &vetor->datnasc.dia, &vetor->datnasc.mes, &vetor->datnasc.ano) != EOF) {
+        printf("Nome: %s\n", vetor->nome);
+        printf("Idade: %d %d %d\n", vetor->datnasc.dia, vetor->datnasc.mes, vetor->datnasc.ano);
     }
 }
-void mostrarpessoa(const int n, const Tpessoa *vetor)
-{
-    for (int i = 0; i < n; i++)
-    {
-        printf("\n--Dados do Aluno--\n");
-        printf("Nome: %s\n", vetor[i].nome);
-        printf("Data de nascimento: %d/%d/%d\n", vetor[i].datnasc.dia, vetor[i].datnasc.mes, vetor[i].datnasc.ano);
-    }
-}
-void mostraraniversario(Tpessoa estrutura[], const int n)
+/*void mostraraniversario(Tpessoa estrutura[], const int n)
 {
     int achou = 0;
     Tdata aniv;
@@ -137,6 +124,7 @@ void mostraraniversario(Tpessoa estrutura[], const int n)
     if (achou == 0)
         printf("Nao ha ninguem cadastrado com essa data\n");
 }
+*/
 void error(int *opcao)
 {
     printf("\nNao ha ninguem cadastrado ou numero invalido!\n");

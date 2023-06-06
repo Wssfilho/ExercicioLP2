@@ -1,60 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
-typedef struct
-{
-    int dia, mes, ano;
-    int matricula;
+#include <unistd.h>
 
-} Tdatas;
-typedef struct
-{
-    char nome[100];
-    Tdatas data;
+typedef struct {
+    char nome[50];
+    int idade;
+} Pessoa;
 
-} Tpessoa;
-void isect(Tpessoa *a)
-{
-    printf("Insira o nome: ");
-    scanf("%[^\n]s%*c", &a->nome);
+void inserir(FILE *arquivo) {
+    Pessoa *p = (Pessoa*) malloc(sizeof(Pessoa));
+    printf("Digite o nome: ");
+    scanf("%s", p->nome);
+    printf("Digite a idade: ");
+    scanf("%d", &p->idade);
+    fprintf(arquivo, "%s %d\n", p->nome, p->idade);
+    free(p);
 }
-void header(void)
-{
-    printf("\t\tBEM VINDO \t\t\n");
-    printf("0. Sair\n");
-    printf("1. Inserir\n");
-    printf("2. Mostrar\n");
-    printf("7. Ajuda\n");
-}
-void ajuda(int *n)
-{
+
+void mostrar(FILE *arquivo) {
     system("clear || cls");
-    printf("As ajudas: \n ");
-    printf("Deseja voltar ao menu? ");
-    scanf("%d", n);
-    system("clear || cls");
+    Pessoa p;
+    rewind(arquivo);
+    while(fscanf(arquivo, "%s %d\n", p.nome, &p.idade) != EOF) {
+        printf("Nome: %s\n", p.nome);
+        printf("Idade: %d\n", p.idade);
+    }
 }
-int main(void)
-{
-    Tpessoa vector;
-    int opcao = 0;
-    do
-    {
-        header();
+
+int main() {
+    FILE *arquivo = fopen("pessoas.txt", "a+");
+    int opcao;
+    do {
+        printf("1 - Inserir\n");
+        printf("2 - Mostrar\n");
+        printf("3 - Sair\n");
+        printf("Opcao: ");
         scanf("%d", &opcao);
-        switch (opcao)
-        {
-        case 1:
-            isect(&vector);
-            printf("%s", vector.nome);
-            break;
-        case 2:
-            break;
-        case 7:
-            ajuda(&opcao);
-            break;
-        default:
-            break;
+        switch(opcao) {
+            case 1:
+                inserir(arquivo);
+                break;
+            case 2:
+                mostrar(arquivo);
+                sleep(5);
+                system("clear || cls");
+                break;
+            case 3:
+                break;
+            default:
+                printf("Opcao invalida!\n");
         }
-
-    } while (opcao != 0);
+    } while(opcao != 3);
+    fclose(arquivo);
+    return 0;
 }
