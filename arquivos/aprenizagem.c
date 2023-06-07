@@ -5,6 +5,7 @@ typedef struct
     char nome[100];
     int idade;
 } Tpessoa;
+//tomorrow add funcion for scan who do in month's birthday
 Tpessoa *alocacao(void);
 void inserir(Tpessoa *);
 void menu(int *opcao);
