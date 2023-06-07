@@ -35,7 +35,7 @@ int main(void)
             mostrar(dados);
             printf("1. Voltar ao menu? 0. Sair");
             scanf("%d", &opcao);
-            while (opcao != 0 || opcao != 1)
+            while (opcao != 0 && opcao != 1)
             {
                 printf("Digite 0 ou 1");
                 scanf("%d", &opcao);
