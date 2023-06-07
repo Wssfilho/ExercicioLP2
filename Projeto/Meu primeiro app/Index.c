@@ -19,7 +19,7 @@ void cabecalho(void);
 void mostrarpessoa(FILE *arq, Tpessoa *);
 Tpessoa *alocacao(void);
 void inserir(Tpessoa *a, FILE *arquivo);
-//void mostraraniversario(Tpessoa estrutura[], const int n);
+// void mostraraniversario(Tpessoa estrutura[], const int n);
 void error(int *opacao);
 // void returno(int *opcao);
 int main(void)
@@ -44,7 +44,7 @@ int main(void)
             cont++;
             break;
         case 2:
-                mostrarpessoa(arquivo, dados);
+            mostrarpessoa(arquivo, dados);
             break;
         case 3:
         /*
@@ -102,10 +102,12 @@ void mostrarpessoa(FILE *arq, Tpessoa *vetor)
 {
     rewind(arq);
     printf("\n--Dados do Aluno--\n");
-    while(fscanf(arq, "%s %d %d %d\n", vetor->nome, &vetor->datnasc.dia, &vetor->datnasc.mes, &vetor->datnasc.ano) != EOF) {
+    while (fscanf(arq, "%s %d %d %d\n", vetor->nome, &vetor->datnasc.dia, &vetor->datnasc.mes, &vetor->datnasc.ano) != EOF)
+    {
         printf("Nome: %s\n", vetor->nome);
         printf("Idade: %d %d %d\n", vetor->datnasc.dia, vetor->datnasc.mes, vetor->datnasc.ano);
     }
+    fclose(arq);
 }
 /*void mostraraniversario(Tpessoa estrutura[], const int n)
 {
