@@ -6,30 +6,18 @@ int *vectoralloc(const int n);
 void values(int *, const int);
 void inverter(const int *const, int *, const int);
 void arq(const int *const, const int);
+void menu(const int * const, const int * const, const int n);
 int main(void)
 {
     srand(time(NULL));
-    int *vector, *newarray, n, option;
+    int *vector, *newarray, n;
     printf("Insira o tamanho do vetor: ");
     scanf("%d", &n);
     vector = vectoralloc(n);
     newarray = vectoralloc(n);
     values(vector, n);
     inverter(vector, newarray, n);
-    printf("Qual vetor vc quer colocar no arquivo? (0. Original) (1. trocado): ");
-    scanf("%d", &option);
-    while (option != 0 && option != 1)
-    {
-        printf("Escolha somente 0 ou 1");
-        scanf("%d", &option);
-    }
-    if (option == 0)
-        arq(vector, n);
-    else
-        arq(newarray, n);
-    sleep(3);
-    system("clear || cls");
-    printf("Gravado!");
+    menu(vector, newarray, n);
     free(newarray);
     free(vector);
     return 0;
@@ -79,4 +67,22 @@ void inverter(const int *const array, int *swap, const int n)
     }
     for (i = 0; i < n; i++)
         printf("[%d] O valor e: %d\n", i + 1, swap[i]);
+}
+void menu(const int * const vector, const int * const newarray, const int n)
+{
+    int option;
+    printf("Qual vetor vc quer colocar no arquivo? (0. Original) (1. trocado): ");
+    scanf("%d", &option);
+    while (option != 0 && option != 1)
+    {
+        printf("Escolha somente 0 ou 1");
+        scanf("%d", &option);
+    }
+    if (option == 0)
+        arq(vector, n);
+    else
+        arq(newarray, n);
+    sleep(3);
+    system("clear || cls");
+    printf("Gravado!");
 }
