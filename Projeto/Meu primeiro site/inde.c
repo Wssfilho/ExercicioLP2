@@ -1,21 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 int *vectoralloc(const int n);
 void values(int *, const int);
-void inverter(int *, int *, const int);
+void inverter(const int *const, int *, const int);
 void arq(const int *const, const int);
 int main(void)
 {
     srand(time(NULL));
-    int *vector, *newarray, n;
+    int *vector, *newarray, n, option;
     printf("Insira o tamanho do vetor: ");
     scanf("%d", &n);
     vector = vectoralloc(n);
     newarray = vectoralloc(n);
     values(vector, n);
     inverter(vector, newarray, n);
-    arq(vector, n);
+    printf("Qual vetor vc quer colocar no arquivo? (0. Original) (1. trocado): ");
+    scanf("%d", &option);
+    while (option != 0 && option != 1)
+    {
+        printf("Escolha somente 0 ou 1");
+        scanf("%d", &option);
+    }
+    if (option == 0)
+        arq(vector, n);
+    else
+        arq(newarray, n);
+    sleep(3);
+    system("clear || cls");
+    printf("Gravado!");
     free(newarray);
     free(vector);
     return 0;
@@ -23,7 +37,7 @@ int main(void)
 void arq(const int *const vector, const int n)
 {
     FILE *vectorarq;
-    if ((vectorarq = fopen("vectorbd.txt", "w")) == NULL)
+    if ((vectorarq = fopen("vectorbd.txt", "a+")) == NULL)
     {
         printf("WARNING: O arquivo nao foi aberto ou criado!");
         exit(-1);
@@ -32,6 +46,7 @@ void arq(const int *const vector, const int n)
     {
         fprintf(vectorarq, "%d", vector[i]);
     }
+    fprintf(vectorarq, "\n");
     fclose(vectorarq);
 }
 int *vectoralloc(const int n)
@@ -49,11 +64,10 @@ void values(int *vector, int n)
         scanf("%d", &vector[i]);
     }
 }
-void inverter(int *array, int *swap, const int n)
+void inverter(const int *const array, int *swap, const int n)
 {
     for (int num = 0; num < n; num++)
         swap[num] = array[num];
-    
     int i, k, aux;
     printf("\n");
     for (i = 0; i < n; i++)
