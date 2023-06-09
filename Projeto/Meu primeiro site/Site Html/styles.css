@@ -1,42 +1,17 @@
-.logo-circul{
-    background: black;
-    border-radius: 87%;
-    padding-bottom: 21%;
-    display: inline-block;
-}
-.infos{
-    display: flex;
-    margin-left: 20px;
-    margin-top: 20px;
-}	
-.titulo{
-    color: black;
-    font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-.but{
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    margin-left: 1px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    cursor: pointer;
-    border-radius: 10px;
-}
-.but:hover{
-    background-color: #8fd693;
-}
-.fa
+.menus
 {
-    margin-right: 10px;
-    
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    display: flex;
+    gap: 32px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 24px;
+}
+.cab
+{
+    font-family: Arial, Helvetica, sans-serif;
+    color: brown;
     
 }
