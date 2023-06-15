@@ -41,7 +41,7 @@ int *vectoralloc(const int n)
 {
     int *vector = (int *)malloc(n * sizeof(int));
     if (vector == NULL)
-        exit(-1);
+        exit(1);
     return vector;
 }
 void values(int *vector, int n)
