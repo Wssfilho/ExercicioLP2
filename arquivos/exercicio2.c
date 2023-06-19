@@ -7,7 +7,6 @@ typedef struct
     char nome[255];
     char telefone[13];
 } Taluno;
-
 int main(void)
 {
     Taluno aluno;
