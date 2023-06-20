@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/wilso/OneDrive/Documentos/GitHub/ExercicioLP2/Funcoes",
-      "program": "c:/Users/wilso/OneDrive/Documentos/GitHub/ExercicioLP2/Funcoes/build/Debug/outDebug",
+      "cwd": "c:/Users/wilso/OneDrive/Documentos/GitHub/ExercicioLP2",
+      "program": "c:/Users/wilso/OneDrive/Documentos/GitHub/ExercicioLP2/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
