@@ -108,7 +108,7 @@ void mostrar(float minCR, float maxCR)
         printf("Erro ao abrir o arquivo!\n");
         exit(1);
     }
-
+    rewind(arq);
     Estudante estudante;
     while (fread(&estudante, sizeof(Estudante), 1, arq) == 1)
     {
