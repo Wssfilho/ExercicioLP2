@@ -1,118 +1,132 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 typedef struct
 {
-    char nome[50];
+    char nome[30];
     int matricula;
-    float CR;
+    float cr;
 } Estudante;
 
-void gravarDados(Estudante *estudantes, int n)
+void inserir(Estudante *turma, int n);
+void gravar(Estudante *turma, int n);
+void mostrar(float minCR, float maxCR);
+void menu(void);
+void executarPrograma(void);
+
+int main(void)
 {
-    FILE *arquivo = fopen("estudantes.dat", "wb");
-    if (arquivo == NULL)
-    {
-        printf("Erro ao abrir o arquivo.\n");
-        exit(1);
-    }
-    fwrite(estudantes, sizeof(Estudante), n, arquivo);
-    fclose(arquivo);
+    executarPrograma();
+    return 0;
 }
 
-void lerDados(Estudante *estudantes, int n)
+void executarPrograma(void)
 {
-    FILE *arquivo = fopen("estudantes.dat", "rb");
-    if (arquivo == NULL)
-    {
-        printf("Erro ao abrir o arquivo.\n");
-        exit(1);
-    }
-    rewind(arquivo);
-    fread(estudantes, sizeof(Estudante), n, arquivo);
-    fclose(arquivo);
-}
+    int opcaoInicial;
+    printf("1. Inserir novos alunos\n");
+    printf("2. Acessar alunos cadastrados\n");
+    printf("Escolha uma opção: ");
+    scanf("%d", &opcaoInicial);
 
-void listarAlunos(Estudante *estudantes, int n, float minCR, float maxCR)
-{
-    for (int i = 0; i < n; i++)
+    if (opcaoInicial == 1)
     {
-        if (estudantes[i].CR >= minCR && estudantes[i].CR < maxCR)
+        int n;
+        printf("Insira o número de alunos: ");
+        scanf("%d", &n);
+
+        Estudante *turma = malloc(n * sizeof(Estudante));
+        if (turma == NULL)
         {
-            printf("%s - %d - %.2f\n", estudantes[i].nome, estudantes[i].matricula, estudantes[i].CR);
+            printf("Erro ao alocar memória!\n");
+            exit(1);
         }
-    }
-}
 
-void lerEstudantes(Estudante *estudantes, int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        printf("Digite o nome do estudante %d: ", i + 1);
-        scanf(" %[^\n]", estudantes[i].nome);
-        printf("Digite a matrícula do estudante %d: ", i + 1);
-        scanf("%d", &estudantes[i].matricula);
-        printf("Digite o CR do estudante %d: ", i + 1);
-        scanf("%f", &estudantes[i].CR);
-    }
-}
+        inserir(turma, n);
+        gravar(turma, n);
 
-void menu(Estudante *estudantes, int n)
-{
+        free(turma);
+    }
+
     int opcao;
     do
     {
-        printf("\nMenu:\n");
-        printf("1) Alunos com CR > 7\n");
-        printf("2) Alunos com 5 < CR < 7\n");
-        printf("3) Alunos com CR < 5\n");
-        printf("4) Encerrar o programa.\n");
-        printf("Digite sua opção: ");
+        menu();
         scanf("%d", &opcao);
-
         switch (opcao)
         {
         case 1:
-            listarAlunos(estudantes, n, 7.0, 10.0);
+            mostrar(7.0f, 10.0f);
             break;
         case 2:
-            listarAlunos(estudantes, n, 5.0, 7.0);
+            mostrar(5.0f, 7.0f);
             break;
         case 3:
-            listarAlunos(estudantes, n, 0.0, 5.0);
+            mostrar(0.0f, 5.0f);
             break;
         case 4:
+            printf("Encerrando o programa.\n");
             break;
         default:
-            printf("Opção inválida.\n");
-            break;
+            printf("Opção inválida!\n");
         }
     } while (opcao != 4);
 }
 
-int main()
+void inserir(Estudante *turma, int n)
 {
-    int n;
-    printf("Digite o número de estudantes: ");
-    scanf("%d", &n);
-
-    Estudante *estudantes = malloc(n * sizeof(Estudante));
-    if (estudantes == NULL)
+    for (int i = 0; i < n; i++)
     {
-        printf("Memoria nao alcoada");
-        exit(-1);
+        printf("Nome do estudante %d: ", i + 1);
+        scanf(" %29[^\n]", turma[i].nome);
+        printf("Matrícula do estudante %d: ", i + 1);
+        scanf("%d", &turma[i].matricula);
+        printf("CR do estudante %d: ", i + 1);
+        scanf("%f", &turma[i].cr);
+    }
+}
+
+void gravar(Estudante *turma, int n)
+{
+    FILE *arq = fopen("turma.dat", "ab");
+    if (arq == NULL)
+    {
+        printf("Erro ao abrir o arquivo!\n");
+        exit(1);
     }
 
-    lerEstudantes(estudantes, n);
+    fwrite(turma, sizeof(Estudante), n, arq);
 
-    gravarDados(estudantes, n);
+    fclose(arq);
+}
 
-    lerDados(estudantes, n);
+void mostrar(float minCR, float maxCR)
+{
+    FILE *arq = fopen("turma.dat", "rb");
+    if (arq == NULL)
+    {
+        printf("Erro ao abrir o arquivo!\n");
+        exit(1);
+    }
 
-    menu(estudantes, n);
+    Estudante estudante;
+    while (fread(&estudante, sizeof(Estudante), 1, arq) == 1)
+    {
+        if (estudante.cr >= minCR && estudante.cr <= maxCR)
+        {
+            printf("%s - %d - %.2f\n", estudante.nome, estudante.matricula, estudante.cr);
+        }
+    }
 
-    free(estudantes);
+    fclose(arq);
+}
 
-    return 0;
+void menu(void)
+{
+    printf("\n----- Menu -----\n\n");
+    printf("1. Alunos com CR > 7\n");
+    printf("2. Alunos com 5 < CR < 7\n");
+    printf("3. Alunos com CR < 5\n");
+    printf("4. Encerrar o programa\n");
+    printf("\nEscolha uma opção: ");
 }
