@@ -5,22 +5,61 @@
 // elementos em um arquivo de acesso aleatrio. A quantidade de elementos do vetor n tambm
 // ser informada pelo usurio, coloque o valor de n na primeira linha do arquivo.
 
-float *allocinsere(int *);
+float *alloc(int);
+void pedirn(int *n)
+{
+    printf("Insira a quantidade de elementos: ");
+    scanf("%d", n);
+}
+void inserir(float *, const int);
 void gravar(const float *const, const int n);
-void mostrar(float *, int);
+void mostrar();
 int main(void)
 {
-    int n;
+    int n, op;
+
     float *vector;
-    vector = allocinsere(&n);
-    gravar(vector, n);
-    mostrar(vector, n);
+    do
+    {
+        printf("1. Inserir\n");
+        printf("2. Monstrar\n");
+        scanf("%d", &op);
+        switch (op)
+        {
+        case 1:
+            pedirn(&n);
+            vector = alloc(n);
+            inserir(vector, n);
+            gravar(vector, n);
+            
+            break;
+        case 2:
+            mostrar();
+            free(vector);
+            
+            break;
+        default:
+            break;
+        }
+
+    } while (op != 3);
+
     free(vector);
     return 0;
 }
-void mostrar(float *vector, int n)
+void inserir(float *vector, const int n)
 {
+    for (int i = 0; i < n; i++)
+    {
+        printf("Insira os elementos: [%d]", i + 1);
+        scanf("%f", &vector[i]);
+    }
+}
+void mostrar()
+{
+    fflush(stdin);
     float media = 0.0;
+    float *vector;
     int i, k;
     FILE *arq;
     if ((arq = fopen("vector.dat", "rb")) == NULL)
@@ -29,15 +68,16 @@ void mostrar(float *vector, int n)
         exit(-1);
     }
     fread(&k, sizeof(int), 1, arq);
+    vector = alloc(k);
     printf("O valor de n e: %d\n", k);
-    fread(vector, sizeof(float), n, arq);
+    fread(vector, sizeof(float), k, arq);
     printf("Os elementos gravados sao\n");
     for (i = 0; i < k; i++)
     {
         media += vector[i] / k;
         printf("[%d] %2.f\n", i + 1, vector[i]);
     }
-    printf("a media e: %.2f", media);
+    printf("a media e: %.2f\n\n", media);
 }
 void gravar(const float *const vector, const int n)
 {
@@ -52,21 +92,14 @@ void gravar(const float *const vector, const int n)
     printf("Arquivo gravado com sucesso\n\n");
     fclose(arq);
 }
-float *allocinsere(int *n)
+float *alloc(int n)
 {
-    printf("Insira a quantidade de elementos: ");
-    scanf("%d", n);
     float *vectortemp;
-    vectortemp = (float *)malloc(*n * sizeof(float));
+    vectortemp = (float *)malloc(n * sizeof(float));
     if (vectortemp == NULL)
     {
         printf("Memoria nao alocada");
         exit(-1);
-    }
-    for (int i = 0; i < *n; i++)
-    {
-        printf("Insira os elementos do vetor na posicao %d: ", i + 1);
-        scanf("%f", &vectortemp[i]);
     }
     return vectortemp;
 }
