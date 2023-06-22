@@ -31,10 +31,11 @@ void mostrar(float *vector, int n)
     fread(&k, sizeof(int), 1, arq);
     printf("O valor de n e: %d\n", k);
     fread(vector, sizeof(float), n, arq);
+    printf("Os elementos gravados sao\n");
     for (i = 0; i < k; i++)
     {
         media += vector[i] / k;
-        printf("Os elementos gravados sao: %f", vector[i]);
+        printf("[%d] %2.f\n", i + 1, vector[i]);
     }
     printf("a media e: %.2f", media);
 }
