@@ -34,6 +34,7 @@ void mostrar(float *vector, int n)
     for (i = 0; i < k; i++)
     {
         media += vector[i] / k;
+        printf("Os elementos gravados sao: %f", vector[i]);
     }
     printf("a media e: %.2f", media);
 }
