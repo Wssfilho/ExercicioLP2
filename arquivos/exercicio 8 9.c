@@ -17,7 +17,6 @@ void mostrar();
 int main(void)
 {
     int n, op;
-
     float *vector;
     do
     {
