@@ -30,13 +30,10 @@ int main(void)
             pedirn(&n);
             vector = alloc(n);
             inserir(vector, n);
-            gravar(vector, n);
-            
+            gravar(vector, n);    
             break;
         case 2:
             mostrar();
-            free(vector);
-            
             break;
         default:
             break;
