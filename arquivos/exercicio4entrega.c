@@ -8,12 +8,10 @@ typedef struct
     int quantidade;
     float valor;
 } Transacao;
-
 int main(void)
 {
-    FILE *arquivo;         // criacao de um ponteiro para arquivo
-    time_t t = time(NULL); // definir variavel do tipo time para pegar o time do computador
-    struct tm tm = *localtime(&t);
+
+    FILE *arquivo;        // criacao de um ponteiro para arquivo
     Transacao transacao;  // definicao da estrutura transacao
     char continuar = 's'; // variavel qu controla o loop
 
@@ -23,7 +21,7 @@ int main(void)
         printf("Erro ao abrir o arquivo.\n"); // caso o arquivo de error
         return 1;
     }
-    
+
     while (continuar == 's' || continuar == 'S') // loop para pedir os dados
     {
         printf("Digite o código numérico do artigo vendido: ");
@@ -34,9 +32,7 @@ int main(void)
         scanf("%d", &transacao.quantidade);
         printf("Digite o valor da transação: ");
         scanf("%f", &transacao.valor);
-        fprintf(arquivo, "%d-%02d-%02d %02d:%02d:%02d, %d, %s, %d, %.2f\n",
-                tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
-                tm.tm_hour, tm.tm_min, tm.tm_sec,
+        fprintf(arquivo, ", %d, %s, %d, %.2f\n",
                 transacao.codigo, transacao.descricao,
                 transacao.quantidade, transacao.valor); // gravacao dos dados num arquivo
         printf("Transação armazenada com sucesso.\n");
