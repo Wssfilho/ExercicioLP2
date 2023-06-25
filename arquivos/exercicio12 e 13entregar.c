@@ -26,20 +26,20 @@ void executarPrograma(void)
     int opcaoInicial;
     printf("1. Inserir novos alunos\n");
     printf("2. Acessar alunos cadastrados\n");
-    printf("Escolha uma opção: "); //menu
+    printf("Escolha uma opcao: "); //menu
     scanf("%d", &opcaoInicial);
 
     if (opcaoInicial == 1)
     {
         //se a opacao for igual a 1, ele insere novos alunos alocados dinamicamnete
         int n;
-        printf("Insira o número de alunos: ");
+        printf("Insira o numero de alunos: ");
         scanf("%d", &n);
 
         Estudante *turma = malloc(n * sizeof(Estudante)); //alocacao dinamica
         if (turma == NULL)
         {
-            printf("Erro ao alocar memória!\n");
+            printf("Erro ao alocar memoria!\n");
             exit(1);
         }
 
@@ -69,7 +69,7 @@ void executarPrograma(void)
             printf("Encerrando o programa.\n");
             break;
         default:
-            printf("Opção inválida!\n");
+            printf("Opcao invalida!\n");
         }
     } while (opcao != 4);
 }
@@ -80,7 +80,7 @@ void inserir(Estudante *turma, int n) //funcao inserir que recebe um ponteiro a 
     {
         printf("Nome do estudante %d: ", i + 1);
         scanf(" %29[^\n]", turma[i].nome); //for para cadastro dos alunos e colocar na estrutura
-        printf("Matrícula do estudante %d: ", i + 1);
+        printf("Matricula do estudante %d: ", i + 1);
         scanf("%d", &turma[i].matricula);
         printf("CR do estudante %d: ", i + 1);
         scanf("%f", &turma[i].cr);
@@ -129,5 +129,5 @@ void menu(void) //menu
     printf("2. Alunos com 5 < CR < 7\n");
     printf("3. Alunos com CR < 5\n");
     printf("4. Encerrar o programa\n");
-    printf("\nEscolha uma opção: ");
+    printf("\nEscolha uma opcao: ");
 }

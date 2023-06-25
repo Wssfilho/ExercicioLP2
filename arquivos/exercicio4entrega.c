@@ -1,40 +1,50 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
 
 typedef struct
 {
-    time_t tempo;
-    int cod;
-    char descricao[500];
-    int quant;
+    int codigo;
+    char descricao[100]; // definicao de uma estrutura para armazenar as variaveis
+    int quantidade;
     float valor;
 } Transacao;
 
 int main(void)
 {
-    Transacao dados;
-    int opcao;
-    FILE *arq;
+    FILE *arquivo;         // criacao de um ponteiro para arquivo
+    time_t t = time(NULL); // definir variavel do tipo time para pegar o time do computador
+    struct tm tm = *localtime(&t);
+    Transacao transacao;  // definicao da estrutura transacao
+    char continuar = 's'; // variavel qu controla o loop
 
-    if ((arq = fopen("contas.dat", "ab")) == NULL)
+    arquivo = fopen("transacoes.txt", "a"); // abertura de um arquivo com append
+    if (arquivo == NULL)
     {
-        printf("Arquivo nao aberto de forma 'append', abrindo como escrita\n");
-        arq = fopen("contas.dat", "wb");
+        printf("Erro ao abrir o arquivo.\n"); // caso o arquivo de error
+        return 1;
     }
-    do
+    
+    while (continuar == 's' || continuar == 'S') // loop para pedir os dados
     {
-        dados.tempo = time(NULL);
-        printf("Insira o codigo da transacao: ");
-        scanf("%d%*c", &dados.cod);
-        printf("Insira a descricaoo: ");
-        scanf("%[^\n]s%*c", dados.descricao);
-        printf("Insira a quantidade do produto: ");
-        scanf("%d", &dados.quant);
-        printf("Insira o valor do produto");
-        scanf("%f", &dados.valor);
-        fwrite(&dados, sizeof(Transacao), 1, arq);
-        printf("0. para sair e 1. para cadastrar novamente");
-        scanf("%d", &opcao);
-    } while (opcao != 0);
+        printf("Digite o código numérico do artigo vendido: ");
+        scanf("%d", &transacao.codigo);
+        printf("Digite a descrição do artigo vendido: ");
+        scanf(" %[^\n]", transacao.descricao);
+        printf("Digite a quantidade: ");
+        scanf("%d", &transacao.quantidade);
+        printf("Digite o valor da transação: ");
+        scanf("%f", &transacao.valor);
+        fprintf(arquivo, "%d-%02d-%02d %02d:%02d:%02d, %d, %s, %d, %.2f\n",
+                tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
+                tm.tm_hour, tm.tm_min, tm.tm_sec,
+                transacao.codigo, transacao.descricao,
+                transacao.quantidade, transacao.valor); // gravacao dos dados num arquivo
+        printf("Transação armazenada com sucesso.\n");
+        printf("Deseja inserir outra transação? (s/n): ");
+        scanf(" %c", &continuar);
+    } // fim do arquivo
+
+    fclose(arquivo); // fechamento do loop
+
+    return 0;
 }
