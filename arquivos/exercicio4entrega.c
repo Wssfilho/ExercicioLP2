@@ -1,46 +1,76 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
+// Define a estrutura Transacao para armazenar as informações sobre cada transação
 typedef struct
 {
+    char data_hora[20];
     int codigo;
-    char descricao[100]; // definicao de uma estrutura para armazenar as variaveis
+    char descricao[100];
     int quantidade;
     float valor;
 } Transacao;
-int main(void)
+// Função para obter a data e hora atual do computador
+void obter_data_hora(char *data_hora)
 {
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    sprintf(data_hora, "%d-%02d-%02d %02d:%02d:%02d",
+            tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
+            tm.tm_hour, tm.tm_min, tm.tm_sec);
+    // uso a função sprintf para formatar a data e hora atual em uma string no formato “AAAA-MM-DD HH:MM:SS.
+}
 
-    FILE *arquivo;        // criacao de um ponteiro para arquivo
-    Transacao transacao;  // definicao da estrutura transacao
-    char continuar = 's'; // variavel qu controla o loop
+// Função para ler as informações do usuário
+void ler_transacao(Transacao *transacao)
+{
+    printf("Digite o codigo numerico do artigo vendido: ");
+    scanf("%d", &transacao->codigo);
+    fflush(stdin);
+    printf("Digite a descricao do artigo vendido: ");
+    scanf("%[^\n]s", transacao->descricao);
+    fflush(stdin);
+    printf("Digite a quantidade: ");
+    scanf("%d", &transacao->quantidade);
+    printf("Digite o valor da transacao: ");
+    scanf("%f", &transacao->valor);
+}
 
-    arquivo = fopen("transacoes.txt", "a"); // abertura de um arquivo com append
+// Função para armazenar a transação no arquivo
+void armazenar_transacao(Transacao *transacao)
+{
+    FILE *arquivo;
+    // Abre o arquivo no modo de anexação ("a") para adicionar novas transações ao final do arquivo
+    arquivo = fopen("transacoes.txt", "a");
     if (arquivo == NULL)
     {
-        printf("Erro ao abrir o arquivo.\n"); // caso o arquivo de error
-        return 1;
+        printf("Erro ao abrir o arquivo.\n");
+        exit(1);
     }
+    // Armazena a transação em uma linha do arquivo, separando os campos por vírgulas
+    fprintf(arquivo, "%s, %d, %s, %d, %.2f\n", transacao->data_hora, transacao->codigo, transacao->descricao, transacao->quantidade, transacao->valor);
+    fclose(arquivo);
+}
 
-    while (continuar == 's' || continuar == 'S') // loop para pedir os dados
+int main(void)
+{
+    Transacao transacao;
+    char continuar;
+
+    // Loop para ler várias transações do usuário
+    do
     {
-        printf("Digite o código numérico do artigo vendido: ");
-        scanf("%d", &transacao.codigo);
-        printf("Digite a descrição do artigo vendido: ");
-        scanf(" %[^\n]", transacao.descricao);
-        printf("Digite a quantidade: ");
-        scanf("%d", &transacao.quantidade);
-        printf("Digite o valor da transação: ");
-        scanf("%f", &transacao.valor);
-        fprintf(arquivo, ", %d, %s, %d, %.2f\n",
-                transacao.codigo, transacao.descricao,
-                transacao.quantidade, transacao.valor); // gravacao dos dados num arquivo
-        printf("Transação armazenada com sucesso.\n");
-        printf("Deseja inserir outra transação? (s/n): ");
+        // pega a data e hora atual
+        obter_data_hora(transacao.data_hora);
+        // Lê as informações sobre a transação do usuário
+        ler_transacao(&transacao);
+        // Armazena a transação no arquivo
+        armazenar_transacao(&transacao);
+        // Pergunta ao usuário se ele deseja inserir outra transação
+        printf("Deseja inserir outra transacao? (s/n): ");
         scanf(" %c", &continuar);
-    } // fim do arquivo
-
-    fclose(arquivo); // fechamento do loop
+    } while (continuar == 's' || continuar == 'S');
 
     return 0;
 }
