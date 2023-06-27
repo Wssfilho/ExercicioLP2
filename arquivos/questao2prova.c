@@ -1,30 +1,33 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main()
-{
-    FILE *fp;
+int main() {
+    FILE *arquivo;
     int n, i;
-    int num;
+    int *vetor;
 
-    fp = fopen("dados.dat", "r+b");
-    if (fp == NULL)
-    {
+    arquivo = fopen("dados.dor", "r+b");
+    if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo.\n");
         return 1;
     }
+    fread(&n, sizeof(int), 1, arquivo);
+    vetor = (int *) malloc(n * sizeof(int));
+    fread(vetor, sizeof(int), n, arquivo);
 
-    fread(&n, sizeof(int), 1, fp);
+    printf("Elementos do vetor:\n");
+    for (i = 0; i < n; i++) {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
 
-    for (i = 0; i < n; i++)
-    {
-        fread(&num, sizeof(int), 1, fp);
-        printf("%d ", num);
-        num *= 2;
-        fseek(fp, -sizeof(int), SEEK_CUR);
-        fwrite(&num, sizeof(int), 1, fp);
+    fseek(arquivo, sizeof(int), SEEK_SET);
+    for (i = 0; i < n; i++) {
+        vetor[i] *= 2;
+        fwrite(&vetor[i], sizeof(int), 1, arquivo);
     }
 
-    fclose(fp);
-
+    free(vetor);
+    fclose(arquivo);
     return 0;
 }
