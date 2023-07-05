@@ -5,8 +5,8 @@ typedef struct
 {
     char nome[40];
     int idade;
-    //monte mais alguns espacos
-    //pode vir: tipos de dados, como dinheiro, mercadoria; 
+    // monte mais alguns espacos
+    // pode vir: tipos de dados, como dinheiro, mercadoria;
 } Tpessoa;
 Tpessoa *allocar(void);
 void menu(int *);
@@ -39,7 +39,10 @@ void menumain()
         case 3:
             mostrarani(dado);
             break;
+        case 4:
+            break;
         default:
+            printf("Selecione uma opcao correta do menu\n");
             break;
         }
     } while (opcao != 0);
@@ -51,7 +54,7 @@ void mostrarani(Tpessoa *dado)
     fflush(stdin);
     char nometemp[40];
     printf("Insira o nome da pessoa que quer buscar: ");
-    gets(nometemp); //teste feito com gets
+    gets(nometemp); // teste feito com gets
     FILE *arquivo;
     if ((arquivo = fopen("dados.txt", "r")) == NULL)
     {
@@ -60,9 +63,9 @@ void mostrarani(Tpessoa *dado)
     }
     fflush(stdin);
     int opcao = 0;
-    while (fscanf(arquivo, "%s", dado->nome) != EOF) //EOF funcao de fim de arquivo
+    while (fscanf(arquivo, "%s", dado->nome) != EOF) // EOF funcao de fim de arquivo
     {
-        if (strcmp(nometemp, dado->nome) == 0) //funcao de compara strings
+        if (strcmp(nometemp, dado->nome) == 0) // funcao de compara strings
         {
             opcao++;
             switch (opcao)
@@ -99,7 +102,7 @@ void menu(int *opcao)
     printf("1. Inserir\n\n");
     printf("2. Mostrar\n\n");
     printf("3. Listar por nome\n\n");
-    //printf("4. Listar por idade\n\n"); //opcao que ira criar uma funcao que listara quem eh maior ou menor que 18 anos BRT
+    // printf("4. Listar por idade\n\n"); //opcao que ira criar uma funcao que listara quem eh maior ou menor que 18 anos BRT
     printf("Escolha uma das opcoes acima: ");
     scanf("%d", opcao);
 }
