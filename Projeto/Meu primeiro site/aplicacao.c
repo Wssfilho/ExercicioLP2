@@ -95,10 +95,10 @@ void mostrar(Tpessoa *dado)
 }
 void menu(int *opcao)
 {
-    printf("0. Sair\n");
-    printf("1. Inserir\n");
-    printf("2. Mostrar\n");
-    printf("3. Listar por nome\n");
+    printf("0. Sair\n\n");
+    printf("1. Inserir\n\n");
+    printf("2. Mostrar\n\n");
+    printf("3. Listar por nome\n\n");
     printf("Escolha uma das opcoes acima: ");
     scanf("%d", opcao);
 }
