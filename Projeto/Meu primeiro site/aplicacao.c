@@ -5,6 +5,8 @@ typedef struct
 {
     char nome[40];
     int idade;
+    //monte mais alguns espacos
+    //pode vir: tipos de dados, como dinheiro, mercadoria; 
 } Tpessoa;
 Tpessoa *allocar(void);
 void menu(int *);
@@ -12,7 +14,7 @@ void inserir(Tpessoa *);
 void gravar(Tpessoa *);
 void mostrar(Tpessoa *);
 void mostrarani(Tpessoa *);
-void menumain();
+void menumain(void);
 int main(void) // inicio do programa principal
 {
     menumain();
