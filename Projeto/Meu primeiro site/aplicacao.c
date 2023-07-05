@@ -51,7 +51,7 @@ void mostrarani(Tpessoa *dado)
     fflush(stdin);
     char nometemp[40];
     printf("Insira o nome da pessoa que quer buscar: ");
-    gets(nometemp);
+    gets(nometemp); //teste feito com gets
     FILE *arquivo;
     if ((arquivo = fopen("dados.txt", "r")) == NULL)
     {
@@ -62,7 +62,7 @@ void mostrarani(Tpessoa *dado)
     int opcao = 0;
     while (fscanf(arquivo, "%s", dado->nome) != EOF)
     {
-        if (strcmp(nometemp, dado->nome) == 0)
+        if (strcmp(nometemp, dado->nome) == 0) //funcao de compara strings
         {
             opcao++;
             switch (opcao)
