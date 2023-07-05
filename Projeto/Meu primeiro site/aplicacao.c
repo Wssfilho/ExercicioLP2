@@ -12,6 +12,12 @@ void inserir(Tpessoa *);
 void gravar(Tpessoa *);
 void mostrar(Tpessoa *);
 void mostrarani(Tpessoa *);
+void menumain();
+int main(void) // inicio do programa principal
+{
+    menumain();
+    return 0;
+}
 void menumain()
 {
     int opcao;
@@ -36,11 +42,6 @@ void menumain()
         }
     } while (opcao != 0);
     free(dado);
-}
-int main(void)
-{
-    menumain();
-    return 0;
 }
 void mostrarani(Tpessoa *dado)
 {
@@ -73,7 +74,6 @@ void mostrarani(Tpessoa *dado)
             }
         }
     }
-
     fclose(arquivo);
 }
 void mostrar(Tpessoa *dado)
