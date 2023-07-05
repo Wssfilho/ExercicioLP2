@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 typedef struct
 {
     char nome[40];
@@ -10,7 +11,8 @@ void menu(int *);
 void inserir(Tpessoa *);
 void gravar(Tpessoa *);
 void mostrar(Tpessoa *);
-int main(void)
+void mostrarani(Tpessoa *);
+void menumain()
 {
     int opcao;
     Tpessoa *dado = allocar();
@@ -26,17 +28,59 @@ int main(void)
         case 2:
             mostrar(dado);
             break;
+        case 3:
+            mostrarani(dado);
+            break;
         default:
             break;
         }
     } while (opcao != 0);
     free(dado);
+}
+int main(void)
+{
+    menumain();
     return 0;
+}
+void mostrarani(Tpessoa *dado)
+{
+    system("clear ||cls");
+    fflush(stdin);
+    char nometemp[40];
+    printf("Insira o nome da pessoa que quer buscar: ");
+    gets(nometemp);
+    FILE *arquivo;
+    if ((arquivo = fopen("dados.txt", "r")) == NULL)
+    {
+        printf("O arquivo nao pode ser aberto");
+        exit(-1);
+    }
+    fflush(stdin);
+    int opcao = 0;
+    while (fscanf(arquivo, "%s", dado->nome) != EOF)
+    {
+        if (strcmp(nometemp, dado->nome) == 0)
+        {
+            opcao++;
+            switch (opcao)
+            {
+            case 1:
+                printf("O nome encontrado foi: %s\n", dado->nome);
+                break;
+            case 2:
+                printf("Nao ha ninguem cadastrado no sistema\n");
+                break;
+            }
+        }
+    }
+
+    fclose(arquivo);
 }
 void mostrar(Tpessoa *dado)
 {
+    system("clear ||cls");
     FILE *arq;
-    if((arq = fopen("dados.txt", "r")) == NULL)
+    if ((arq = fopen("dados.txt", "r")) == NULL)
     {
         printf("O arquivo nao foi aberto");
         exit(-1);
@@ -46,13 +90,13 @@ void mostrar(Tpessoa *dado)
         printf("Nome: %s\n", dado->nome);
         printf("Idade: %d\n\n", dado->idade);
     }
-    
 }
 void menu(int *opcao)
 {
     printf("0. Sair\n");
     printf("1. Inserir\n");
     printf("2. Mostrar\n");
+    printf("3. Listar por nome\n");
     printf("Escolha uma das opcoes acima: ");
     scanf("%d", opcao);
 }
@@ -69,6 +113,7 @@ Tpessoa *allocar(void)
 }
 void inserir(Tpessoa *dados)
 {
+    system("clear ||cls");
     fflush(stdin);
     printf("Insira seu nome: ");
     scanf("%[^\n]s", dados->nome);
