@@ -60,7 +60,7 @@ void mostrarani(Tpessoa *dado)
     }
     fflush(stdin);
     int opcao = 0;
-    while (fscanf(arquivo, "%s", dado->nome) != EOF)
+    while (fscanf(arquivo, "%s", dado->nome) != EOF) //EOF funcao de fim de arquivo
     {
         if (strcmp(nometemp, dado->nome) == 0) //funcao de compara strings
         {
@@ -99,6 +99,7 @@ void menu(int *opcao)
     printf("1. Inserir\n\n");
     printf("2. Mostrar\n\n");
     printf("3. Listar por nome\n\n");
+    //printf("4. Listar por idade\n\n"); //opcao que ira criar uma funcao que listara quem eh maior ou menor que 18 anos BRT
     printf("Escolha uma das opcoes acima: ");
     scanf("%d", opcao);
 }
