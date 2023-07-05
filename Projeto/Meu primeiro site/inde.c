@@ -6,7 +6,7 @@ int *vectoralloc(const int n);
 void values(int *, const int);
 void inverter(const int *const, int *, const int);
 void arq(const int *const, const int);
-void menu(const int * const, const int * const, const int n);
+void menu(const int *const, const int *const, const int n);
 int main(void)
 {
     srand(time(NULL));
@@ -68,7 +68,7 @@ void inverter(const int *const array, int *swap, const int n)
     for (i = 0; i < n; i++)
         printf("[%d] O valor e: %d\n", i + 1, swap[i]);
 }
-void menu(const int * const vector, const int * const newarray, const int n)
+void menu(const int *const vector, const int *const newarray, const int n)
 {
     int option;
     printf("Qual vetor vc quer colocar no arquivo? (0. Original) (1. trocado): ");
