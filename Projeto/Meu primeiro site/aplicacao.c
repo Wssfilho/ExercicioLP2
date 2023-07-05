@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 typedef struct
 {
     char nome[40];
     int idade;
-    // monte mais alguns espacos
-    // pode vir: tipos de dados, como dinheiro, mercadoria;
 } Tpessoa;
+
 Tpessoa *allocar(void);
 void menu(int *);
 void inserir(Tpessoa *);
@@ -15,11 +15,13 @@ void gravar(Tpessoa *);
 void mostrar(Tpessoa *);
 void mostrarani(Tpessoa *);
 void menumain(void);
-int main(void) // inicio do programa principal
+
+int main(void)
 {
     menumain();
     return 0;
 }
+
 void menumain()
 {
     int opcao;
@@ -48,13 +50,14 @@ void menumain()
     } while (opcao != 0);
     free(dado);
 }
+
 void mostrarani(Tpessoa *dado)
 {
     system("clear ||cls");
     fflush(stdin);
     char nometemp[40];
     printf("Insira o nome da pessoa que quer buscar: ");
-    gets(nometemp); // teste feito com gets
+    scanf(" %[^\n]s", nometemp);
     FILE *arquivo;
     if ((arquivo = fopen("dados.txt", "r")) == NULL)
     {
@@ -63,9 +66,10 @@ void mostrarani(Tpessoa *dado)
     }
     fflush(stdin);
     int opcao = 0;
-    while (fscanf(arquivo, "%s", dado->nome) != EOF) // EOF funcao de fim de arquivo
+    while (fscanf(arquivo, "%[^\n]s", dado->nome) != EOF)
     {
-        if (strcmp(nometemp, dado->nome) == 0) // funcao de compara strings
+        fscanf(arquivo, "%d%*c", &dado->idade);
+        if (strcmp(nometemp, dado->nome) == 0)
         {
             opcao++;
             switch (opcao)
@@ -81,6 +85,7 @@ void mostrarani(Tpessoa *dado)
     }
     fclose(arquivo);
 }
+
 void mostrar(Tpessoa *dado)
 {
     system("clear ||cls");
@@ -90,22 +95,24 @@ void mostrar(Tpessoa *dado)
         printf("O arquivo nao foi aberto");
         exit(-1);
     }
-    while (fscanf(arq, "%s %d", dado->nome, &dado->idade) != EOF)
+    while (fscanf(arq, "%[^\n]s", dado->nome) != EOF)
     {
+        fscanf(arq, "%d%*c", &dado->idade);
         printf("Nome: %s\n", dado->nome);
         printf("Idade: %d\n\n", dado->idade);
     }
 }
+
 void menu(int *opcao)
 {
     printf("0. Sair\n\n");
     printf("1. Inserir\n\n");
     printf("2. Mostrar\n\n");
     printf("3. Listar por nome\n\n");
-    // printf("4. Listar por idade\n\n"); //opcao que ira criar uma funcao que listara quem eh maior ou menor que 18 anos BRT
     printf("Escolha uma das opcoes acima: ");
     scanf("%d", opcao);
 }
+
 Tpessoa *allocar(void)
 {
     Tpessoa *temp;
@@ -117,25 +124,27 @@ Tpessoa *allocar(void)
     }
     return temp;
 }
+
 void inserir(Tpessoa *dados)
 {
     system("clear ||cls");
     fflush(stdin);
     printf("Insira seu nome: ");
-    scanf("%[^\n]s", dados->nome);
-    fflush(stdin);
+    scanf(" %[^\n]s", dados->nome);
+    scanf("%*c");
     printf("Insira sua idade: ");
     scanf("%d", &dados->idade);
 }
+
 void gravar(Tpessoa *dado)
 {
     FILE *arq;
-    if ((arq = fopen("dados.txt", "a+")) == NULL)
+    if ((arq = fopen("dados.txt", "a")) == NULL)
     {
         system("clear || cls");
         printf("Nao foi aberto o arquivo! Saindo");
         exit(-1);
     }
-    fprintf(arq, "%s %d\n", dado->nome, dado->idade);
+    fprintf(arq, "%s\n%d\n", dado->nome, dado->idade);
     fclose(arq);
 }

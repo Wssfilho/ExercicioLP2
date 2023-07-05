@@ -92,8 +92,10 @@ Tpessoa *alocacao(void)
 }
 void inserir(Tpessoa *a, FILE *arquivo)
 {
+    fflush(stdin);
     printf("Digite o nome: ");
-    scanf("%s", a->nome);
+    gets(a->nome);
+    fflush(stdin);
     printf("Digite a idade: ");
     scanf("%d %d %d", &a->datnasc.dia, &a->datnasc.mes, &a->datnasc.ano);
     fprintf(arquivo, "%s %d %d %d\n", a->nome, a->datnasc.dia, a->datnasc.mes, a->datnasc.ano);
