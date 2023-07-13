@@ -1,3 +1,0 @@
-# README.md
-
-Este é um arquivo README.md para o GitHub que descreve a minha aplicação de cadastro. A aplicação permite ao usuário inserir, mostrar, mostrar por nome e sair de um banco de dados de pessoas cadastradas. A aplicação foi desenvolvida em c e permite atravez de manipulacao de arquivo com FILE abrir e fechar o banco de dados. A aplicação tem uma interface simples e intuitiva que facilita o uso e a compreensão das funcionalidades. A aplicação é um projeto pessoal que visa demonstrar as minhas habilidades em programação e banco de dados. Em breve havera a opcao de buscar por data de nascimento de manipulcacao em arquivos binarios tambem
