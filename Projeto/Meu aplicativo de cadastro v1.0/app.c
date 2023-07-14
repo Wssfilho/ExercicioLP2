@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 typedef struct
 {
     char nome[30];
@@ -12,6 +11,7 @@ void menu(void);
 void choose(int *);
 Tdado *allc(void);
 void inserir(Tdado *);
+//void colcarq(Tdado *);
 
 //******MAIN********
 int main(void)
@@ -34,7 +34,7 @@ void inserir(Tdado *dado)
 void choose(int *opcao)
 {
     Tdado *dado;
-    dado = allc();
+    dado = allc(); //allocacao dinamica
     do
     {
         switch (*opcao)
