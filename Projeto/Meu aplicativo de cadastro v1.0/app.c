@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+//ou bem tu fazer um codigo ingles ou portugues!
 typedef struct
 {
     char nome[30];
