@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+//ou bem tu faz um codigo ingles ou portugues!
 typedef struct
 {
     char nome[30];
@@ -12,7 +13,6 @@ void choose(int *);
 Tdado *allc(void);
 void inserir(Tdado *);
 //void colcarq(Tdado *);
-
 //******MAIN********
 int main(void)
 {
